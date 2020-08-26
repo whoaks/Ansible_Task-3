@@ -1,0 +1,11 @@
+---
+# handlers file for loadbalancer
+
+- name: loadbalancer restart
+  service:
+    name: "haproxy"
+    state: restarted
+  become: true
+  become_user: root
+  become_method: sudo
+

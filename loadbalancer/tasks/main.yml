@@ -1,0 +1,28 @@
+---
+# tasks file for loadbalancer
+
+- name: Installing haproxy software
+  package:
+    name: "haproxy"
+    state: present
+  become: true
+  become_user: root
+  become_method: sudo
+
+- name: Copy Configuration file of LB
+  template:
+    src: "haproxy.cfg"
+    dest: "/etc/haproxy/haproxy.cfg"
+  notify: loadbalancer restart
+  become: true
+  become_user: root
+  become_method: sudo
+
+- name: LoadBalancer started
+  service:
+    name: "haproxy"
+    state: started
+  become: true
+  become_user: root
+  become_method: sudo
+

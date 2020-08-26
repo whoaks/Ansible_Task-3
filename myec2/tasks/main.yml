@@ -1,0 +1,18 @@
+---
+# tasks file for myec2
+- name: Provisioning OS running in AWS Cloud
+  ec2:
+    key_name: "key"
+    instance_type: "{{ ec2_instance_type}}"
+    image: "{{ image }}"
+    wait: yes
+    count: 5
+    vpc_subnet_id: "subnet-0892eab4da13f00a5"
+    assign_public_ip: yes
+    region: "{{ ec2_region }}"
+    state: present
+    group_id: "sg-0f7296c8f424d39c0"
+    aws_access_key: "{{ user }}"
+    aws_secret_key: "{{ pass }}"
+  register: ec2
+
